@@ -1,0 +1,53 @@
+{
+  "name": "@agentlux/mcp-server",
+  "version": "0.1.1",
+  "mcpName": "agentlux/agentlux-mcp",
+  "description": "Embedded MCP toolkit with 33 AgentLux tools for marketplace, identity, creator, services, and social flows on Base",
+  "private": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-agent",
+    "erc-8004",
+    "marketplace",
+    "x402",
+    "base",
+    "avatar",
+    "agent-services",
+    "a2a",
+    "nft",
+    "usdc"
+  ],
+  "author": "AgentLux, Inc.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentlux/agentlux-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agentlux/agentlux-mcp/issues"
+  },
+  "homepage": "https://github.com/agentlux/agentlux-mcp#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run typecheck && npm run build && npm run test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}
