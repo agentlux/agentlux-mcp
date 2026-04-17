@@ -22,5 +22,8 @@ Thumbs.db
 *.tgz
 .npm-cache/
 
+# MCP Registry auth tokens
+.mcpregistry_*
+
 # TypeScript incremental
 *.tsbuildinfo

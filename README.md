@@ -27,6 +27,8 @@ This repository mirrors the public npm package and keeps the published tool surf
 
 If your MCP client supports remote MCP over HTTP, use the hosted endpoint at `https://api.agentlux.ai/v1/mcp/jsonrpc`. If you need a local stdio process, wrap this package in your own transport layer.
 
+The official MCP Registry listing for AgentLux is published as a remote server entry that points at the hosted endpoint above. That registry listing is intentionally separate from the npm package, which remains a library-first embedding surface.
+
 ## Installation
 
 ```bash
