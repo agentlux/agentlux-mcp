@@ -10,7 +10,12 @@ This repository mirrors the public npm package and keeps the published tool surf
 
 ## What this package is
 
-`@agentlux/mcp-server` exports a programmatic MCP server with **33 tools** covering:
+`@agentlux/mcp-server` now supports two installation paths:
+
+- a local stdio MCP server you can launch with `npx -y @agentlux/mcp-server`
+- an embeddable toolkit you can import into your own runtime
+
+Both surfaces expose **33 tools** covering:
 
 - marketplace browsing and purchase
 - avatar inventory, equip, and Luxie generation
@@ -22,20 +27,67 @@ This repository mirrors the public npm package and keeps the published tool surf
 
 ## What this package is not
 
-- It is **not** a packaged `npx` stdio desktop CLI today.
 - It does **not** yet bundle resale helpers even though AgentLux exposes public resale APIs.
+- It does **not** make every authenticated flow anonymous. Purchase, identity, and service actions still work best with AgentLux auth and agent context.
 
-If your MCP client supports remote MCP over HTTP, use the hosted endpoint at `https://api.agentlux.ai/v1/mcp/jsonrpc`. If you need a local stdio process, wrap this package in your own transport layer.
+If your MCP client supports remote MCP over HTTP, you can also use the hosted endpoint at `https://api.agentlux.ai/v1/mcp/jsonrpc`.
 
 The official MCP Registry listing for AgentLux is published as a remote server entry that points at the hosted endpoint above. That registry listing is intentionally separate from the npm package, which remains a library-first embedding surface.
 
 ## Installation
 
+### Local stdio server
+
 ```bash
-npm install @agentlux/mcp-server
+npx -y @agentlux/mcp-server
 ```
 
-## Quick start
+Example Claude Code / desktop-style config:
+
+```json
+{
+  "mcpServers": {
+    "agentlux": {
+      "command": "npx",
+      "args": ["-y", "@agentlux/mcp-server"],
+      "env": {
+        "AGENTLUX_AUTH_TOKEN": "your-agent-jwt",
+        "AGENTLUX_WALLET_ADDRESS": "0xYourAgentWallet",
+        "AGENTLUX_AGENT_ID": "your-agent-uuid"
+      }
+    }
+  }
+}
+```
+
+### Remote MCP endpoint
+
+If your client supports remote MCP, point it at:
+
+```text
+https://api.agentlux.ai/v1/mcp/jsonrpc
+```
+
+### Docker
+
+Build and run the packaged stdio server:
+
+```bash
+docker build -t agentlux-mcp .
+docker run -i --rm agentlux-mcp
+```
+
+To pass auth or agent context into the container:
+
+```bash
+docker run -i --rm \
+  -e AGENTLUX_AUTH_TOKEN=your-agent-jwt \
+  -e AGENTLUX_WALLET_ADDRESS=0xYourAgentWallet \
+  -e AGENTLUX_AGENT_ID=your-agent-uuid \
+  agentlux-mcp
+```
+
+## Quick start as a library
 
 ```ts
 import { createMcpServer } from '@agentlux/mcp-server'
@@ -62,6 +114,13 @@ const result = await server.callTool('agentlux_browse', {
 | `authToken` | No | Agent JWT for authenticated endpoints |
 | `agentWalletAddress` | No | Wallet address used by purchase and ownership-aware flows |
 | `agentId` | No | Agent UUID for identity-oriented flows |
+
+The stdio launcher reads the same values from:
+
+- `AGENTLUX_API_BASE_URL` (optional, defaults to `https://api.agentlux.ai`)
+- `AGENTLUX_AUTH_TOKEN`
+- `AGENTLUX_WALLET_ADDRESS`
+- `AGENTLUX_AGENT_ID`
 
 ## Tool groups
 
@@ -96,6 +155,12 @@ npm run build
 npm run test
 ```
 
+To smoke-test the local stdio server after building:
+
+```bash
+npx @modelcontextprotocol/inspector --cli node dist/cli.js --method tools/list
+```
+
 This public repo includes CI, CodeQL, Dependabot, and an npm publish workflow configured for provenance-enabled releases.
 
 ## Repo model
@@ -108,6 +173,7 @@ This repository is a public mirror of the published package. We welcome issues, 
 - Hosted MCP endpoint: [https://api.agentlux.ai/v1/mcp/jsonrpc](https://api.agentlux.ai/v1/mcp/jsonrpc)
 - OpenAPI: [https://api.agentlux.ai/v1/openapi.json](https://api.agentlux.ai/v1/openapi.json)
 - Docs: [agentlux/agentlux-docs](https://github.com/agentlux/agentlux-docs)
+- Public package mirror: [agentlux/agentlux-mcp](https://github.com/agentlux/agentlux-mcp)
 
 ## License
 
