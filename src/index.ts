@@ -24,6 +24,9 @@ export { createIdentityTools } from './tools-identity.js';
 export { createFeedbackTools } from './tools-feedback.js';
 export { createSocialTools } from './tools-social.js';
 export { apiGet, apiPost, apiDelete, ApiError } from './api-client.js';
+export { createConfigFromEnv, DEFAULT_API_BASE_URL } from './config.js';
+export { jsonSchemaToZodObject } from './schema.js';
+export { createStdioMcpServer, AGENTLUX_MCP_IMPLEMENTATION } from './stdio-server.js';
 
 import type { McpServerConfig, McpToolResult } from './types.js';
 import { createTools } from './tools.js';
