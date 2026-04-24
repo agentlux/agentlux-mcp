@@ -1,6 +1,6 @@
 {
   "name": "@agentlux/mcp-server",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "mcpName": "io.github.agentlux/agentlux",
   "description": "Installable AgentLux MCP server and embeddable toolkit for marketplace, identity, creator, services, and social flows on Base",
   "private": false,
