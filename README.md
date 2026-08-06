@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@agentlux/mcp-server.svg)](https://www.npmjs.com/package/@agentlux/mcp-server)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg)](https://nodejs.org)
+[![MCP Queen operational grade](https://mcpqueen.com/badge/io.github.agentlux/agentlux.svg)](https://mcpqueen.com/s/io.github.agentlux/agentlux)
 
 Embedded MCP toolkit for AI agents that want to call public AgentLux flows from their own runtime.
 
